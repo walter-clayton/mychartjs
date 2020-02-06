@@ -20,6 +20,13 @@
                 <a class="btn btn-primary btn-lg" href="#" role="button" value= "onClick()">Take a look</a>
             </p>
         </div>
+        <form method="post" action="/addscores">
+            <label>Enter Your Scores</label><br>
+            <input type="number" name="Squat" placeholder="150kg..." required>
+            <input type="number" name="Bench Press" placeholder="150kg.." required>
+            <input type="number" name="Deadlift" placeholder="150kg.." required>
+            <input type="submit" value="Add">
+        </form>
         <div class="container d-flex  " style= "position: relative; height: 40vh; width:80vw;">
                 <canvas id="myRadar"></canvas>
                 <div class="container">
@@ -27,7 +34,44 @@
                 </div>
         </div>
     </div>
-<script src="./components/my.bar.chart.js" ></script>
+<script >
+
+var ctx = 'myChart';
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['You', 'Elite', 'Advanced', 'Average', 'Beginner'],
+        datasets: [{
+            label: 'Levels of strength',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 <script src="./components/my.radar.chart.js" ></script>
 </body>
 </html>

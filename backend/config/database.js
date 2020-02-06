@@ -12,14 +12,7 @@ var termination = chalk.bold.magenta;
 
 //export this function and imported by server.js
 
-// mongoose.connect('mongodb://localhost/powerlifting',  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}, (err) => {
-//     if(err) {
-//         console.log(error('Database error: ' + err));
-//     } else {
-//         console.log(connected('Successful connection to the Powerlifting database!')); 
-//        
-
-module.exports =function(){
+module.exports = function(){
 
     mongoose.connect('mongodb://localhost/powerlifting',  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(mongoose.connection.on('connected', function(){
