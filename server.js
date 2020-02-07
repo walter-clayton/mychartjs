@@ -5,17 +5,16 @@ var router  = express.Router();
 var app = express();
 var port = 4000;
 var bodyParser = require('body-parser');
+// Connect to the model 
+var Score = require("./backend/models/powerlifting.model");
+var db = require('./backend/config/database');
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-// Connect to the model 
-var Score = require("./backend/models/powerlifting.model");
-
 // Connect to the database
-var db = require('./backend/config/database');
 db();
 
 
