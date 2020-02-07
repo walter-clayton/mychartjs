@@ -13,6 +13,7 @@ app.set("view engine", "ejs");
 
 // Connect to the model 
 var Score = require("./backend/models/powerlifting.model");
+
 // Connect to the database
 var db = require('./backend/config/database');
 db();
