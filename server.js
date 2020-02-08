@@ -1,22 +1,28 @@
 
 
-var express = require('express');
-var router  = express.Router();
-var app = express();
-var port = 4000;
-var bodyParser = require('body-parser');
+var express     = require('express');
+var app         = express();
+var port        = 4000;
+var bodyParser  = require('body-parser');
+var flash       = require("connect-flash");
+
 // Connect to the model 
 var Score = require("./backend/models/powerlifting.model");
 var db = require('./backend/config/database');
 
+// var scoresRoutes       = require("./backend/routes/scores"),
+//     indexRoutes    = require("./backend/routes/index");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 app.set("view engine", "ejs");
 
 // Connect to the database
 db();
 
+// app.use("/", indexRoutes);
+// app.use("/scores", scoresRoutes);
 
 app.get("/", (req, res) => {
     Score.find({}, function(err, documents)
