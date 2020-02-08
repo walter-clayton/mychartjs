@@ -19,18 +19,26 @@
                 <a class="btn btn-primary btn-lg" href="#" role="button" value= "onClick()">Take a look</a>
             </p>
         </div>
-        <form method="post" action="/addscores">
+        <form method="POST" action="/scores">
             <label>Enter Your Scores</label><br>
-            <input type="number" name="Squat" placeholder="150kg..." required>
-            <input type="number" name="Bench Press" placeholder="150kg.." required>
-            <input type="number" name="Deadlift" placeholder="150kg.." required>
-            <input type="submit" value="Add">
+            <input type="number" name="squat" placeholder="150kg..." required>
+            <input type="number" name="benchPress" placeholder="150kg.." required>
+            <input type="number" name="deadlift" placeholder="150kg.." required>
+            <input type="submit">
         </form>
         <div>
+            <% for(var i=0; i<documents.length; i++) { %>
             <ul>
                 <li>
                     Squat: <%= documents[1].squat  %>
                 </li>
+                <li>
+                    Bench: <%= documents[1].benchPress  %>
+                </li>
+                <li>
+                    Deadlift: <%= documents[1].deadlift  %>
+                </li>
+                <% } %>
             </ul>
         </div>
         <div class="container d-flex  " style= "position: relative; height: 40vh; width:80vw;">
