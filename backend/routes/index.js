@@ -1,6 +1,6 @@
 var express = require("express");
 var router  = express.Router();
-var Score = require("./backend/models/powerlifting.model");
+var Score = require("../models/powerlifting.model");
 
 router.get("/", (req, res) => {
     Score.find({}, function(err, documents)
@@ -43,3 +43,5 @@ router.get("/:id", (req, res) => {
       .then(score => res.json(score))
       .catch(err => res.status(400).json('Error: ' + err));
   });
+
+  module.exports = router;
