@@ -1,0 +1,23 @@
+<%- include ('../partials/header') %>
+
+<div>
+    <ul>
+        <li>
+            Squat: <%= documents.squat  %>
+        </li>
+        <li>
+            Bench: <%= documents.benchPress  %>
+        </li>
+        <li>
+            Deadlift: <%= documents.deadlift  %>
+        </li>
+    </ul>
+</div>
+<div class="d-flex">
+    <a class="btn btn-light border col-6" href="/<%= documents._id %>/edit">Edit</a>
+    <form class = "delete-form col-6 p-0" action="/<%= documents._id %>?_method=DELETE" method="POST">
+    <button class="btn btn-light border w-100">Delete</button>
+    </form>
+    </div>
+
+<%- include ('../partials/footer') %>

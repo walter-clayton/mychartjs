@@ -2,6 +2,7 @@
 
 var express     = require('express');
 var app         = express();
+var methodOverride  = require("method-override");
 var port        = 4000;
 var bodyParser  = require('body-parser');
 var flash       = require('connect-flash');
@@ -14,6 +15,7 @@ var db = require('./backend/config/database');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 app.use(flash());
 app.set('view engine', 'ejs');
 

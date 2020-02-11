@@ -9,8 +9,8 @@ router.get("/", (req, res) => {
             console.log("Something went wront in the find()");
         } else {
             console.log("here are all of the scores...");
-            console.log(documents[1].squat);
             console.log(documents);
+            console.log(documents[0].squat);
             res.render("index", {documents: documents});
             
           
@@ -26,22 +26,57 @@ router.post("/scores", (req, res) => {
     })
     myData.save()
         .then(item => {
-            res.send("Scores saved to database");
-            req.flash("success", "Successfully added scores ");
+
             res.redirect("/"); 
+            req.flash("success", "You have added a score");
 
         })
         .catch(err => {
             res.status(400).send("Unable to save to database");
+
         });
 });
 
 
 
-router.get("/:id", (req, res) => {
-    Score.findById(req.params.id)
-      .then(score => res.json(score))
-      .catch(err => res.status(400).json('Error: ' + err));
-  });
+
+// find the score
+router.get("/:id", function(req, res){
+    Score.findById(req.params.id, function(err, documents){
+        res.render("scores/show", {documents: documents});
+    });
+});
+
+// EDIT CAMPGROUND ROUTE
+router.get("/:id/edit", function(req, res){
+    Score.findById(req.params.id, function(err, documents){
+        res.render("scores/edit", {documents: documents});
+    });
+});
+
+// UPDATE CAMPGROUND ROUTE
+router.put("/:id", function(req, res){
+    // find and update the correct campground
+    Score.findByIdAndUpdate(req.params.id, req.body.documents,  function(err, updatedScore){
+       if(err){
+           res.send("There was an error updating your score");
+       } else {
+           //redirect somewhere(show page)
+           res.redirect("/" + req.params.id);
+       }
+    });
+});
+
+
+// DESTROY Score ROUTE
+router.delete("/:id", function(req, res){
+    Score.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           res.send("there was a problem");
+       } else {
+           res.redirect("/");
+       }
+    });
+ });
 
   module.exports = router;
