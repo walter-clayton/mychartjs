@@ -11,7 +11,8 @@ router.get("/", (req, res) => {
             console.log("here are all of the scores...");
             console.log(documents);
             console.log(documents[0].squat);
-            res.render("index", {documents: documents});
+            req.flash("success", "you added a score!");
+            res.render("index", {documents: documents, message: req.flash("success")});
             
           
         }
@@ -26,9 +27,9 @@ router.post("/scores", (req, res) => {
     })
     myData.save()
         .then(item => {
-
+            req.flash("info", "Hi there!");
+            console.log("data saved");
             res.redirect("/"); 
-            req.flash("success", "You have added a score");
 
         })
         .catch(err => {
@@ -54,14 +55,15 @@ router.get("/:id/edit", function(req, res){
     });
 });
 
-// UPDATE CAMPGROUND ROUTE
+// UPDATE SCORE ROUTE
 router.put("/:id", function(req, res){
-    // find and update the correct campground
+    // find and update the correct score
     Score.findByIdAndUpdate(req.params.id, req.body.documents,  function(err, updatedScore){
        if(err){
            res.send("There was an error updating your score");
        } else {
            //redirect somewhere(show page)
+           req.flash("info", "Hi there!");
            res.redirect("/" + req.params.id);
        }
     });
@@ -74,7 +76,8 @@ router.delete("/:id", function(req, res){
        if(err){
            res.send("there was a problem");
        } else {
-           res.redirect("/");
+            req.flash('test', 'it worked');
+            res.redirect("/");
        }
     });
  });
