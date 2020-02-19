@@ -9,16 +9,21 @@
                 <a class="btn btn-primary btn-lg" href="#" role="button" value= "onClick()">Take a look</a>
             </p>
         </div>
-        <form method="POST" action="/scores">
+        <form method="POST" action="/">
             <label>Enter Your Scores</label><br>
             <input type="number" name="squat" placeholder="150kg..." required>
             <input type="number" name="benchPress" placeholder="150kg.." required>
             <input type="number" name="deadlift" placeholder="150kg.." required>
             <input type="submit">
         </form>
-
-            <div class="alert alert-success" role="alert"><%= message %>...</div>
-
+        <% if(message && message.length > 0) { %>
+            <div class="alert alert-success" role="alert">
+                <%= message %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <% } %>
         <div>
             <% documents.forEach(function (documents) { %>
             <ul>

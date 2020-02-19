@@ -24,6 +24,7 @@ app.use(session({
 }));
 app.use(flash());
 
+
 // Connect to the model 
 var db = require('./backend/config/database');
 // Connect to the database
