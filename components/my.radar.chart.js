@@ -1,8 +1,8 @@
-
+var Chart = require('chart.js');
 
 var ctx = 'myRadar';
 
-var myRadar = new Schema(ctx, {
+var myRadar = new Radar(ctx, {
     type: 'radar',
     data: {
         labels: ['Squat', 'Bench', 'Deadlift'],
