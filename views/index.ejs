@@ -1,27 +1,59 @@
 <%- include ('./partials/header') %>
 
-    <div class="container m-5">
-        <div class="jumbotron  m-5">
-            <h1 class="display-3"><i class="fas fa-dumbbell"></i> Strength</h1>
-            <p class="lead">Discover what you weigh up to.</p>
-            <hr class="my-2">
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button" value= "onClick()">Take a look</a>
-            </p>
+
+<div class="container">
+      <div class="card">
+        <header class="card-header">
+          <div class="card-header-title">
+            Enter Your Scores
+          </div>
+          <div class="card-header-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <form method="POST" action="/">
+                <div class="field">
+                  <label class="label">Squat</label>
+                  <div class="control has-icons-right">
+                    <input class="input is-success" type="number" name="squat" placeholder="150kg..." required>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Bench Press</label>
+                  <div class="control has-icons-right">
+                    <input class="input is-success" type="number" name="benchPress" placeholder="150kg.." required>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Deadlift</label>
+                  <div class="control  has-icons-right">
+                    <input class="input is-success" type="number" name="deadlift" placeholder="150kg.." required>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>                
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class = "button is-success" >Submit</button>
+                  </div>              
+                </div>
+            </form>
+          </div>
         </div>
-        <form method="POST" action="/">
-            <label>Enter Your Scores</label><br>
-            <input type="number" name="squat" placeholder="150kg..." required>
-            <input type="number" name="benchPress" placeholder="150kg.." required>
-            <input type="number" name="deadlift" placeholder="150kg.." required>
-            <input type="submit">
-        </form>
+      </div>
         <% if(message && message.length > 0) { %>
-            <div class="alert alert-success" role="alert">
+            <div class="notification">
                 <%= message %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <button class="delete"></button>
             </div>
             <% } %>
         <div>
@@ -43,7 +75,9 @@
                         <td> <%= documents.deadlift  %> </td>
                         <td>
                             <div class="tooltip-wrap">
-                            <img src={helpLogo} alt="Sam" />
+                              <span src={helpLogo} class="icon">
+                                <i class="fas fa-address-card"></i>
+                              </span>
                                 <div class="tooltip-content">
                                 <p>Name</p>
                                 <p>George</p>
@@ -54,18 +88,31 @@
                                 </div> 
                             </div>
                         </td>
-                        <td>                
-                            <button>Compare</button>
-                            <a class = "btn btn-xs btn-light border" 
-                            href="/<%= documents._id %>/edit">
-                            Edit
-                            </a>
-                            <form class = "delete-form" action="/<%=documents._id %>?_method=DELETE" method="POST">
-                            <input type="submit" class="btn btn-xs btn-light border" value="Delete">
-                            </form>
-                        </td>
-                      </tr>
-                      <% }); %>
+                        <td>
+                          <div class="dropdown is-active">
+                            <div class="dropdown-trigger">
+                              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span class="icon is-small">
+                                  <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                                </span>
+                              </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                              <div class="dropdown-content">
+                                <div class="dropdown-item">
+                                    <a class = "btn btn-xs btn-light border" href="/<%= documents._id %>/edit">Edit</a>
+                                  </div>
+                                  <div class="dropdown-item">
+                                    <form class = "delete-form" action="/<%=documents._id %>?_method=DELETE" method="POST">
+                                    <input type="submit" class="btn btn-xs btn-light border" value="Delete">
+                                  </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <% }); %>
                     </tbody>
               </table>
         </div>
@@ -132,6 +179,7 @@
           </div>
         </div>
     </div>
+  </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
 var ctx = 'myRadar';
