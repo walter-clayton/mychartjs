@@ -2,6 +2,8 @@
 
 
 <div class="container">
+  <div class="columns is-desktop">
+    <div class="column">
       <div class="card">
         <header class="card-header">
           <div class="card-header-title">
@@ -50,129 +52,118 @@
           </div>
         </div>
       </div>
-        <% if(message && message.length > 0) { %>
-            <div class="notification">
-                <%= message %>
-            <button class="delete"></button>
-            </div>
-            <% } %>
-        <div>
-            <table class="table">
-                <thead class="thead-light">
+    </div>
+    <div class="column">
+      <% if(message && message.length > 0) { %>
+          <div class="notification">
+              <%= message %>
+          <button class="delete"></button>
+          </div>
+          <% } %>
+      <div>
+          <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Squat:</th>
+                  <th>Bench:</th>
+                  <th>Deadlift:</th>
+                  <th>Reference:</th>
+                  <th>Options:</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% documents.forEach(function (documents) { %>
                   <tr>
-                    <th>Squat:</th>
-                    <th>Bench:</th>
-                    <th>Deadlift:</th>
-                    <th>Reference:</th>
-                    <th>Options:</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% documents.forEach(function (documents) { %>
-                    <tr>
-                        <td> <%= documents.squat  %> </td>
-                        <td> <%= documents.benchPress  %> </td>
-                        <td> <%= documents.deadlift  %> </td>
-                        <td>
-                            <div class="tooltip-wrap">
-                              <span src={helpLogo} class="icon">
-                                <i class="fas fa-address-card"></i>
+                      <td> <%= documents.squat  %> </td>
+                      <td> <%= documents.benchPress  %> </td>
+                      <td> <%= documents.deadlift  %> </td>
+                      <td>
+                          <div class="tooltip-wrap">
+                            <span src={helpLogo} class="icon">
+                              <i class="fas fa-address-card"></i>
+                            </span>
+                              <div class="tooltip-content">
+                              <p>Name</p>
+                              <p>George</p>
+                              <p>Level</p>
+                              <p>amateur</p>
+                              <p>Year</p>
+                              <p>2019</p>
+                              </div> 
+                          </div>
+                      </td>
+                      <td>
+                        <div class="dropdown">
+                          <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                              <span class="icon is-small">
+                                <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
                               </span>
-                                <div class="tooltip-content">
-                                <p>Name</p>
-                                <p>George</p>
-                                <p>Level</p>
-                                <p>amateur</p>
-                                <p>Year</p>
-                                <p>2019</p>
-                                </div> 
-                            </div>
-                        </td>
-                        <td>
-                          <div class="dropdown is-active">
-                            <div class="dropdown-trigger">
-                              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                <span class="icon is-small">
-                                  <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                </span>
-                              </button>
-                            </div>
-                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                              <div class="dropdown-content">
+                            </button>
+                          </div>
+                          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                              <div class="dropdown-item">
+                                  <a class = "btn btn-xs btn-light border" href="/<%= documents._id %>/edit">Edit</a>
+                                </div>
                                 <div class="dropdown-item">
-                                    <a class = "btn btn-xs btn-light border" href="/<%= documents._id %>/edit">Edit</a>
-                                  </div>
-                                  <div class="dropdown-item">
-                                    <form class = "delete-form" action="/<%=documents._id %>?_method=DELETE" method="POST">
-                                    <input type="submit" class="btn btn-xs btn-light border" value="Delete">
-                                  </form>
-                                  </div>
+                                  <form class = "delete-form" action="/<%=documents._id %>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-xs btn-light border" value="Delete">
+                                </form>
                                 </div>
                               </div>
                             </div>
-                          </td>
-                        </tr>
-                        <% }); %>
-                    </tbody>
-              </table>
-        </div>
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Powerlifting Scores</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(17px, 19px, 0px);">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
                           </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                      <canvas id="myRadar" width="472" height="208" class="chartjs-render-monitor" style="display: block; width: 472px; height: 208px;"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                      <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                      </span>
-                      <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                      </span>
-                      <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                      </span>
-                    </div>
-                  </div>               
+                        </td>
+                      </tr>
+                      <% }); %>
+                  </tbody>  
+            </table>
+      </div>
+    </div>
+        <div class="colum">
+        <div class="card">
+          <header class="card-header">
+            <div class="card-header-title">
+                        Powerlifting Scores
+                      </div>
+                    </header>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-content">
+                          <!-- <div class="chart-container" style="position: relative"> -->
+                            <canvas id="myRadar" width="400" height="400" ></canvas>
+                          <!-- </div> -->
+                        </div>
+                      </div>
+                    </div>               
             </div>
-        </div>
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-              <!-- Card Header - Dropdown -->
-              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
-                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(17px, 19px, 0px);">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </div>
+          </div>
+          <div class="column">
+            <div class="card">
+                    <header class="card-header">
+                      <div class="card-header-title">
+                        Powerlifting Scores
+                      </div>
+                    </header>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-content">
+                          <div class="chart-container" style="position: relative">
+                            <canvas id="myBarChart" style="display: block; width: 668px; height: 320px;" width="668" height="320" class="chartjs-render-monitor"></canvas>
+                            </div>
+                        </div>
+                      </div>
+                    </div>               
               </div>
-              <!-- Card Body -->
-              <div class="card-body">
+          </div>
+      </div>
+
+
+        </div>
+
+
                 <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                  <canvas id="myBarChart" style="display: block; width: 668px; height: 320px;" width="668" height="320" class="chartjs-render-monitor"></canvas>
                 </div>
               </div>
             </div>
@@ -182,7 +173,24 @@
   </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
+
+
+
+let dropdown = document.querySelectorAll('.dropdown');
+      dropdown.forEach(e => {
+        e.addEventListener('click', function(event) {
+            event.stopPropagation();
+            e.classList.toggle('is-active');
+        });
+        
+      })
+
+
+
+
 var ctx = 'myRadar';
+
+
 
 var myRadar = new Chart(ctx, {
     type: 'radar',
@@ -204,6 +212,19 @@ var myRadar = new Chart(ctx, {
             }]
     },
     options: {
+      maintainAspectRatio: false,
+      aspectRatio: 1,
+        tooltips: {
+          callbacks: {
+          title: function(tooltipItem, data) {
+          return data['labels'][tooltipItem[0]['index']];
+          }
+          },
+          titleAlign: 'center',
+          titleFontSize: 50,
+          bodyFontSize: 34,
+
+        },
         scale: {
             angleLines: {
                 display: false
@@ -212,7 +233,8 @@ var myRadar = new Chart(ctx, {
                 suggestedMin: 50,
                 suggestedMax: 200
             }
-        }
+        },
+
     }
 });
 var ctx = 'myBarChart';
