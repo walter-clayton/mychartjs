@@ -2,8 +2,8 @@
 
 
 <div class="container">
-  <div class="columns is-desktop">
-    <div class="column">
+  <div class="columns is-multiline is-centered">
+    <div class="column is-half-tablet">
       <div class="card">
         <header class="card-header">
           <div class="card-header-title">
@@ -53,14 +53,14 @@
         </div>
       </div>
     </div>
-    <div class="column">
-      <% if(message && message.length > 0) { %>
-          <div class="notification">
-              <%= message %>
-          <button class="delete"></button>
-          </div>
-          <% } %>
-      <div>
+  <div class="column is-one-third-tablet">
+    <% if(message && message.length > 0) { %>
+      <div class="notification">
+        <%= message %>
+        <button class="delete"></button>
+      </div>
+      <% } %>
+      <div class="box">
           <table class="table">
               <thead class="thead-light">
                 <tr>
@@ -121,24 +121,24 @@
             </table>
       </div>
     </div>
-        <div class="colum">
-        <div class="card">
-          <header class="card-header">
-            <div class="card-header-title">
-                        Powerlifting Scores
-                      </div>
-                    </header>
-                    <div class="card-content">
-                      <div class="media">
-                        <div class="media-content">
-                          <!-- <div class="chart-container" style="position: relative"> -->
-                            <canvas id="myRadar" width="400" height="400" ></canvas>
-                          <!-- </div> -->
-                        </div>
-                      </div>
-                    </div>               
-            </div>
+        <div class="column is-one-third-tablet">
+          <div class="card">
+            <header class="card-header">
+              <div class="card-header-title">
+                Powerlifting Scores
+              </div>
+            </header>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <div class="chart-container" style="position: relative">
+                      <canvas id="myRadar" class="chartjs-render-monitor"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>               
           </div>
+        </div>
           <div class="column">
             <div class="card">
                     <header class="card-header">
@@ -150,27 +150,17 @@
                       <div class="media">
                         <div class="media-content">
                           <div class="chart-container" style="position: relative">
-                            <canvas id="myBarChart" style="display: block; width: 668px; height: 320px;" width="668" height="320" class="chartjs-render-monitor"></canvas>
+                            <canvas id="myBarChart" class="chartjs-render-monitor"></canvas>
                             </div>
                         </div>
                       </div>
                     </div>               
               </div>
           </div>
-      </div>
-
-
-        </div>
-
-
-                <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
   </div>
+</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
 
@@ -212,8 +202,6 @@ var myRadar = new Chart(ctx, {
             }]
     },
     options: {
-      maintainAspectRatio: false,
-      aspectRatio: 1,
         tooltips: {
           callbacks: {
           title: function(tooltipItem, data) {
