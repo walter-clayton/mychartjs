@@ -1,65 +1,219 @@
 <%- include ('./partials/header') %>
 
-    <div class="container m-5">
-        <div class="jumbotron  m-5">
-            <h1 class="display-3"><i class="fas fa-dumbbell"></i> Strength</h1>
-            <p class="lead">Discover what you weigh up to.</p>
-            <hr class="my-2">
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button" value= "onClick()">Take a look</a>
-            </p>
-        </div>
-        <form method="POST" action="/scores">
-            <label>Enter Your Scores</label><br>
-            <input type="number" name="squat" placeholder="150kg..." required>
-            <input type="number" name="benchPress" placeholder="150kg.." required>
-            <input type="number" name="deadlift" placeholder="150kg.." required>
-            <input type="submit">
-        </form>
-        <div>
-            <% documents.forEach(function (documents) { %>
-            <ul>
-                <li>
-                    Squat: <%= documents.squat  %>
-                </li>
-                <li>
-                    Bench: <%= documents.benchPress  %>
-                </li>
-                <li>
-                    Deadlift: <%= documents.deadlift  %>
-                </li>
-            </ul>
-            <div>
-                <a class = "btn btn-xs btn-light border" 
-                href="/<%= documents._id %>/edit">
-                Edit
-                </a>
-                <form class = "delete-form" action="/<%=documents._id %>?_method=DELETE" method="POST">
-                <input type="submit" class="btn btn-xs btn-light border" value="Delete">
-                </form>
-            </div> 
-            <% }); %>
-        </div>
-        <div class="container d-flex  " style= "position: relative; height: 40vh; width:80vw;">
-                <canvas id="myRadar"></canvas>
-                <div class="container">
-                    <canvas id="myBarChart"></canvas>
+
+<div class="container">
+  <div class="columns is-multiline is-centered">
+    <div class="column is-half-desktop">
+      <div class="card">
+        <header class="card-header">
+          <div class="card-header-title">
+            Enter Your Scores
+          </div>
+          <div class="card-header-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <form method="POST" action="/">
+                <div class="field">
+                  <label class="label">Squat</label>
+                  <div class="control has-icons-right">
+                    <input class="input is-success" type="number" name="squat" placeholder="150kg..." required>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  </div>
                 </div>
+                <div class="field">
+                  <label class="label">Bench Press</label>
+                  <div class="control has-icons-right">
+                    <input class="input is-success" type="number" name="benchPress" placeholder="150kg.." required>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Deadlift</label>
+                  <div class="control  has-icons-right">
+                    <input class="input is-success" type="number" name="deadlift" placeholder="150kg.." required>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>                
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class = "button is-success" >Submit</button>
+                  </div>              
+                </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  <div class="column is-half-desktop">
+    <% if(message && message.length > 0) { %>
+      <div class="notification">
+        <%= message %>
+        <button class="delete"></button>
+      </div>
+      <% } %>
+      <div class="box">
+          <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Squat:</th>
+                  <th>Bench:</th>
+                  <th>Deadlift:</th>
+                  <th>Reference:</th>
+                  <th>Options:</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% documents.forEach(function (documents) { %>
+                  <tr>
+                      <td> <%= documents.squat  %> </td>
+                      <td> <%= documents.benchPress  %> </td>
+                      <td> <%= documents.deadlift  %> </td>
+                      <td>
+                          <div class="tooltip-wrap">
+                            <span src={helpLogo} class="icon">
+                              <i class="fas fa-address-card"></i>
+                            </span>
+                              <div class="tooltip-content">
+                              <p>Name</p>
+                              <p>George</p>
+                              <p>Level</p>
+                              <p>amateur</p>
+                              <p>Year</p>
+                              <p>2019</p>
+                              </div> 
+                          </div>
+                      </td>
+                      <td>
+                        <div class="dropdown">
+                          <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                              <span class="icon is-small">
+                                <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                              </span>
+                            </button>
+                          </div>
+                          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                              <div class="dropdown-item">
+                                  <a class = "btn btn-xs btn-light border" href="/<%= documents._id %>/edit">Edit</a>
+                                </div>
+                                <div class="dropdown-item">
+                                  <form class = "delete-form" action="/<%=documents._id %>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-xs btn-light border" value="Delete">
+                                </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <% }); %>
+                  </tbody>  
+            </table>
+      </div>
+    </div>
+        <div class="column is-half-tablet">
+          <div class="card">
+            <header class="card-header">
+              <div class="card-header-title">
+                Powerlifting Scores
+              </div>
+            </header>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <div class="chart-container" style="position: relative">
+                      <canvas id="myRadar" class="chartjs-render-monitor"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>               
+          </div>
+        </div>
+          <div class="column is-half-tablet">
+            <div class="card">
+                    <header class="card-header">
+                      <div class="card-header-title">
+                        Powerlifting Scores
+                      </div>
+                    </header>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-content">
+                          <div class="chart-container" style="position: relative">
+                            <canvas id="myBarChart" class="chartjs-render-monitor"></canvas>
+                            </div>
+                        </div>
+                      </div>
+                    </div>               
+              </div>
+          </div>
+  </div>
+</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
+
+
+
+let dropdown = document.querySelectorAll('.dropdown');
+      dropdown.forEach(e => {
+        e.addEventListener('click', function(event) {
+            event.stopPropagation();
+            e.classList.toggle('is-active');
+        });
+        
+      })
+
+
+
+
 var ctx = 'myRadar';
+
+
 
 var myRadar = new Chart(ctx, {
     type: 'radar',
     data: {
         labels: ['Squat', 'Bench', 'Deadlift'],
-        datasets: [{
-            data: [<%= documents[0].squat  %>, <%= documents[0].benchPress  %>, <%= documents[0].deadlift  %>]
-        }]
+            datasets: [{
+                label: 'First set',
+                data: [<%= documents[0].squat  %>, <%= documents[0].benchPress  %>, <%= documents[0].deadlift  %>],
+                backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)'
+                ]
+            },
+            {
+                label: 'Second set',
+                data: [<%= documents[1].squat  %>, <%= documents[1].benchPress  %>, <%= documents[1].deadlift  %>],
+                backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)'
+                ]            
+            }]
     },
     options: {
+      maintainAspectRatio: false,
+        tooltips: {
+          callbacks: {
+          title: function(tooltipItem, data) {
+          return data['labels'][tooltipItem[0]['index']];
+          }
+          },
+          titleAlign: 'center',
+          titleFontSize: 50,
+          bodyFontSize: 34,
+
+        },
         scale: {
             angleLines: {
                 display: false
@@ -68,7 +222,8 @@ var myRadar = new Chart(ctx, {
                 suggestedMin: 50,
                 suggestedMax: 200
             }
-        }
+        },
+
     }
 });
 var ctx = 'myBarChart';
@@ -97,6 +252,7 @@ var myBarChart = new Chart(ctx, {
                 }]
             },
             options: {
+              maintainAspectRatio: false,
                 scales: {
                     yAxes: [{
                         ticks: {

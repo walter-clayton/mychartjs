@@ -1,31 +1,38 @@
 
 
-var express     = require('express');
-var app         = express();
-var methodOverride  = require("method-override");
-var port        = 4000;
-var bodyParser  = require('body-parser');
-var flash       = require('connect-flash');
+var express         = require('express'),
+    app             = express(),
+    port            = process.env.PORT || 4000,
+    cookieParser    = require("cookie-parser"),
+    methodOverride  = require("method-override"),
+    session         = require("express-session"),
+    bodyParser      = require('body-parser'),
+    flash           = require('connect-flash');
 
-// Connect to the model 
-var db = require('./backend/config/database');
 
-// var scoresRoutes       = require("./backend/routes/scores"),
- var   indexRoutes    = require('./backend/routes/index');
+var   indexRoutes    = require('./backend/routes/index');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-app.use(flash());
 app.set('view engine', 'ejs');
+app.use(cookieParser());
+app.use(session({
+    secret: 'secret123', 
+    saveUninitialized: true,
+    resave: true
+}));
+app.use(flash());
 
+
+// Connect to the model 
+var db = require('./backend/config/database');
 // Connect to the database
 db();
 
 
 app.use('/', indexRoutes);
-// app.use("/scores", scoresRoutes);
-
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
